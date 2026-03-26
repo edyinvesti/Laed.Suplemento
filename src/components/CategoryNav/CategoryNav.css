@@ -1,0 +1,115 @@
+.category-nav-section {
+  padding: 2rem 0;
+  position: relative;
+  z-index: 10;
+  background-color: var(--primary-blue);
+}
+
+.category-nav-scroll {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0.5rem;
+}
+
+.category-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.category-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  min-width: 90px;
+  transition: transform 0.2s ease;
+}
+
+.category-icon-wrapper {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: var(--bg-white);
+  border: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-blue);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+/* Hover Effects */
+.category-nav-item:hover {
+  transform: translateY(-5px);
+}
+
+.category-nav-item:hover .category-icon-wrapper {
+  background-color: var(--primary-green);
+  color: #111;
+  border-color: var(--primary-green);
+  box-shadow: 0 15px 25px rgba(57, 255, 20, 0.3);
+}
+
+.category-nav-item:hover .category-label {
+  color: var(--primary-green);
+}
+
+/* Featured / PROMO Kit style */
+.category-nav-item:nth-child(7) .category-icon-wrapper {
+  color: #111;
+  background-color: var(--primary-green);
+  border-color: var(--primary-green);
+}
+.category-nav-item:nth-child(7):hover .category-icon-wrapper {
+  background-color: #fff;
+  color: var(--primary-blue);
+  border-color: #fff;
+  box-shadow: 0 15px 25px rgba(255, 255, 255, 0.3);
+}
+.category-nav-item:nth-child(7):hover .category-label {
+  color: #fff;
+}
+
+@media (max-width: 992px) {
+  .category-nav-scroll {
+    justify-content: flex-start;
+    gap: 1.5rem;
+    padding: 0 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-nav-section {
+    padding: 0 0 2rem 0;
+  }
+  
+  .category-icon-wrapper {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .category-icon-wrapper svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .category-label {
+    font-size: 0.7rem;
+  }
+}

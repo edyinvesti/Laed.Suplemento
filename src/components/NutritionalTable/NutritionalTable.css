@@ -1,0 +1,69 @@
+.nutritional-table {
+  border: 2px solid var(--border-light);
+  background-color: var(--bg-white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: var(--text-dark);
+  font-family: inherit;
+  max-width: 400px;
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.nt-header {
+  border-bottom: 3px solid var(--text-dark);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.nt-header h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.nt-header p {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.nt-body {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.nt-body th, .nt-body td {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-light);
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.nt-body th {
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: var(--text-gray);
+  border-bottom: 2px solid var(--border-light);
+}
+
+.nt-body th:first-child, .nt-body td:first-child {
+  text-align: left;
+}
+
+.nt-body td:nth-child(2) {
+  font-weight: 700;
+}
+
+.nt-footer {
+  font-size: 0.65rem;
+  color: var(--text-gray);
+  line-height: 1.4;
+  border-top: 1px solid var(--border-light);
+  padding-top: 0.8rem;
+}
+
+.nt-footer p {
+  margin-bottom: 0.4rem;
+}

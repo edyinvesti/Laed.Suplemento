@@ -1,0 +1,142 @@
+.shop-by-goal-section {
+  padding: 4rem 0;
+  background-color: var(--bg-verde-leve);
+}
+
+.section-title.text-center {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--primary-blue);
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.goal-card {
+  position: relative;
+  background: linear-gradient(145deg, var(--primary-blue), #002b99);
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 30px rgba(0, 71, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.goal-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+
+.goal-card.has-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.goal-overlay {
+  display: none;
+}
+
+.goal-card.has-bg .goal-overlay {
+  display: block;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(0, 71, 255, 0.8) 0%, rgba(0,0,0,0.5) 100%);
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.goal-card.has-bg:hover .goal-overlay {
+  background: linear-gradient(to top, rgba(0, 71, 255, 0.95) 0%, rgba(0,0,0,0.7) 100%);
+}
+
+.goal-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 71, 255, 0.3);
+}
+
+.goal-card:hover::before {
+  opacity: 1;
+}
+
+.goal-icon-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  background: var(--primary-green);
+  filter: blur(35px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.goal-card:hover .goal-icon-glow {
+  opacity: 0.45;
+}
+
+.goal-icon {
+  position: relative;
+  z-index: 2;
+  color: var(--primary-green);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.goal-card:hover .goal-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.goal-content {
+  position: relative;
+  z-index: 2;
+}
+
+.goal-content h3 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.goal-content p {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
+  .goal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .section-title.text-center {
+    font-size: 1.6rem;
+  }
+  
+  .goal-card {
+    padding: 2rem 1rem;
+  }
+}

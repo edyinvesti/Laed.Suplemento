@@ -1,0 +1,93 @@
+.product-carousel-section {
+  padding: 4rem 0;
+  background: white;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.carousel-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e293b;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.carousel-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--primary-blue);
+  border-radius: 2px;
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.control-btn {
+  width: 44px;
+  height: 44px;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 50%;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.control-btn:hover {
+  background: var(--primary-blue);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 229, 255, 0.4);
+}
+
+.carousel-track-container {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  margin: 0 -1rem;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+.carousel-track-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar Chrome/Safari */
+}
+
+.carousel-track {
+  display: flex;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.carousel-item {
+  flex: 0 0 300px; /* Fixed width for carousel items */
+  transition: transform 0.3s;
+}
+
+/* Specific styling for ProductCard inside Carousel */
+.carousel-item .product-card {
+  margin: 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  .carousel-item {
+    flex: 0 0 85%; /* Mobile: Show 85% of one card to hint at scroll */
+  }
+}

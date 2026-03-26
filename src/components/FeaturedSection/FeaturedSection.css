@@ -1,0 +1,58 @@
+.featured-products-section {
+  padding: 2rem 0;
+  background: white;
+}
+
+.featured-products-section .container {
+  max-width: 1600px; /* Wider container for featured section */
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.featured-item {
+  position: relative;
+  width: 100%; /* Fully flexible */
+}
+
+.featured-badge {
+  display: none; /* Hide badges for small category tiles */
+}
+
+.featured-item:hover {
+  transform: translateY(-5px);
+}
+
+
+.featured-badge {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: var(--primary-blue);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.4);
+  letter-spacing: 1px;
+}
+
+/* Enhancing ProductCard inside FeaturedSection */
+.featured-item .product-card {
+  margin: 0;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.03);
+  height: 100%;
+}
+
+@media (max-width: 968px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
