@@ -228,7 +228,7 @@ const Checkout = () => {
               <div className="checkout-items">
                 {cartItems.map(item => (
                   <div key={item.id} className="checkout-item">
-                    <img src={item.image} alt={item.name} />
+                    <img src={`${import.meta.env.BASE_URL}${item.image.replace(/^\//, '')}`} alt={item.name} onError={(e) => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}produtos/whey-concentrado-chocolate.png`; }} />
                     <div className="checkout-item-details">
                       <span className="checkout-item-name">{item.name}</span>
                       <span className="checkout-item-qty">Qtd: {item.quantity}</span>

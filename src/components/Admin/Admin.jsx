@@ -173,7 +173,7 @@ const Admin = () => {
                 {products.map(product => (
                   <tr key={product.id}>
                     <td>
-                      <img src={product.image} alt={product.name} className="table-img" />
+                      <img src={`${import.meta.env.BASE_URL}${product.image.replace(/^\//, '')}`} alt={product.name} className="table-img" onError={(e) => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}produtos/whey-concentrado-chocolate.png`; }} />
                     </td>
                     <td>
                       <div className="table-product-name">{product.name}</div>

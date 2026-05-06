@@ -3,9 +3,11 @@ import './CartModal.css';
 import { useStore } from '../../context/StoreContext';
 import { X, Trash2, ShoppingBag, Plus, Award } from 'lucide-react';
 
+const BASE = import.meta.env.BASE_URL;
+
 const UPSELL_PRODUCTS = [
-  { id: 3, name: 'PURE CREATINE - 500g', price: 139.90, image: '/laed-cyber-bottles.png' },
-  { id: 6, name: 'DAILY HEALTH NEON - 90 Caps', price: 49.90, image: '/laed-cyber-bottles.png' }
+  { id: 3, name: 'PURE CREATINE - 500g', price: 139.90, image: '/produtos/creatina-monohidratada.png' },
+  { id: 6, name: 'DAILY HEALTH NEON - 90 Caps', price: 49.90, image: '/produtos/multivitaminico-daily.png' }
 ];
 
 const CartModal = () => {
@@ -57,7 +59,7 @@ const CartModal = () => {
               <div className="cart-items-list">
                 {cartItems.map(item => (
                   <div key={item.id} className="cart-item">
-                    <img src={item.image} alt={item.name} className="cart-item-img" />
+                    <img src={`${BASE}${item.image.replace(/^\//, '')}`} alt={item.name} className="cart-item-img" onError={(e) => { e.target.onerror = null; e.target.src = `${BASE}produtos/whey-concentrado-chocolate.png`; }} />
                     <div className="cart-item-info">
                       <p className="cart-item-name">{item.name}</p>
                       <p className="cart-item-price">R$ {item.price.toFixed(2).replace('.', ',')}</p>
@@ -80,7 +82,7 @@ const CartModal = () => {
                 <div className="upsell-list">
                   {UPSELL_PRODUCTS.map(product => (
                     <div key={product.id} className="upsell-item">
-                      <img src={product.image} alt={product.name} />
+                      <img src={`${BASE}${product.image.replace(/^\//, '')}`} alt={product.name} onError={(e) => { e.target.onerror = null; e.target.src = `${BASE}produtos/whey-concentrado-chocolate.png`; }} />
                       <div className="upsell-details">
                         <span className="upsell-name">{product.name}</span>
                         <span className="upsell-price">R$ {product.price.toFixed(2).replace('.', ',')}</span>

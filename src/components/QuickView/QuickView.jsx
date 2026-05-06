@@ -31,7 +31,7 @@ const QuickView = () => {
 
         <div className="quickview-content">
           <div className="quickview-image">
-            <img src={image} alt={name} />
+            <img src={`${import.meta.env.BASE_URL}${image.replace(/^\//, '')}`} alt={name} onError={(e) => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}produtos/whey-concentrado-chocolate.png`; }} />
           </div>
 
           <div className="quickview-info">
