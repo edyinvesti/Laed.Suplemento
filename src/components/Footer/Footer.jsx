@@ -64,20 +64,20 @@ const Footer = () => {
           <div className="footer-col">
             <h4>INSTITUCIONAL</h4>
             <ul>
-              <li><a href="#">Sobre a LAED SUPLEMENTOS</a></li>
-              <li><a href="#">Políticas de Privacidade</a></li>
-              <li><a href="#">Trabalhe Conosco</a></li>
-              <li><a href="#">Termos de Uso</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}`}>Sobre a LAED SUPLEMENTOS</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}`}>Políticas de Privacidade</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}`}>Trabalhe Conosco</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}`}>Termos de Uso</a></li>
             </ul>
           </div>
 
           <div className="footer-col">
             <h4>AJUDA E SUPORTE</h4>
             <ul>
-              <li><a href="#">Central de Atendimento</a></li>
-              <li><a href="#">Meus Pedidos</a></li>
-              <li><a href="#">Trocas e Devoluções</a></li>
-              <li><a href="#">Prazos de Entrega</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}`}>Central de Atendimento</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}`}>Meus Pedidos</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}`}>Trocas e Devoluções</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}`}>Prazos de Entrega</a></li>
             </ul>
           </div>
 
