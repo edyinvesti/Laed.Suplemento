@@ -21,3 +21,5 @@ const TopTicker = () => {
 };
 
 export default TopTicker;
+
+

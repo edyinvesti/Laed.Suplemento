@@ -17,3 +17,5 @@ const MarqueeTicker = () => {
 };
 
 export default MarqueeTicker;
+
+

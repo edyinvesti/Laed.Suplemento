@@ -1,14 +1,13 @@
 import React, { useMemo } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import { useStore } from '../../context/StoreContext';
-import { ALL_PRODUCTS } from '../../data/products';
 import './ProductGrid.css';
 
 const ProductGrid = () => {
-  const { searchQuery, activeFilters, sortOrder, setSortOrder } = useStore();
+  const { searchQuery, activeFilters, sortOrder, setSortOrder, products } = useStore();
 
   const filteredProducts = useMemo(() => {
-    let results = ALL_PRODUCTS;
+    let results = products;
 
     // Search filter
     if (searchQuery.trim()) {
@@ -101,3 +100,5 @@ const ProductGrid = () => {
 };
 
 export default ProductGrid;
+
+

@@ -82,3 +82,5 @@ const ProductCard = ({ product, layout = 'vertical', isReversed = false, showMar
 };
 
 export default ProductCard;
+
+

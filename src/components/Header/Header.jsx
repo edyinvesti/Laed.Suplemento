@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, User, Heart, ShoppingCart, MapPin, ChevronDown, X, Menu, Phone, Mail, Zap } from 'lucide-react';
+import { Search, User, Heart, ShoppingCart, MapPin, ChevronDown, X, Menu, Phone, Mail, Zap, Settings } from 'lucide-react';
 import { useStore } from '../../context/StoreContext';
-import { ALL_PRODUCTS } from '../../data/products';
 import Logo from '../Logo/Logo';
 import './Header.css';
 
@@ -14,7 +13,7 @@ const announcements = [
 ];
 
 const Header = () => {
-  const { searchQuery, setSearchQuery, cartCount, setIsCartOpen, wishlist, setIsMobileMenuOpen, goToHome, REGIONS, selectedRegion, setSelectedRegion, isLoginOpen, setIsLoginOpen, user } = useStore();
+  const { searchQuery, setSearchQuery, cartCount, setIsCartOpen, wishlist, setIsMobileMenuOpen, goToHome, REGIONS, selectedRegion, setSelectedRegion, isLoginOpen, setIsLoginOpen, user, products, viewProduct } = useStore();
   const [currentAnnouncement, setCurrentAnnouncement] = useState(0);
   const [isRegionDropdownOpen, setIsRegionDropdownOpen] = useState(false);
   const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false);
@@ -32,7 +31,7 @@ const Header = () => {
   useEffect(() => {
     if (searchQuery.trim().length >= 2) {
       const q = searchQuery.toLowerCase();
-      const filtered = ALL_PRODUCTS.filter(p => 
+      const filtered = products.filter(p => 
         p.name.toLowerCase().includes(q) || 
         p.categoria.toLowerCase().includes(q)
       ).slice(0, 5); // Limit to 5 results
@@ -153,6 +152,14 @@ const Header = () => {
           </div>
 
           <div className="header-actions">
+            <Link to="/admin" className="action-item" style={{ color: 'var(--primary-blue)' }}>
+              <Settings size={32} strokeWidth={1.5} />
+              <div className="action-text">
+                <span className="line1">Painel</span>
+                <span className="line2">Admin</span>
+              </div>
+            </Link>
+
             <Link to="/minha-conta" className="action-item">
               <User size={32} strokeWidth={1.5} />
               <div className="action-text">
@@ -232,3 +239,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

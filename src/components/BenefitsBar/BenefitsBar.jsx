@@ -51,3 +51,5 @@ const BenefitsBar = () => {
 };
 
 export default BenefitsBar;
+
+

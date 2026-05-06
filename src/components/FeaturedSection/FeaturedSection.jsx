@@ -26,3 +26,5 @@ const FeaturedSection = ({ products }) => {
 };
 
 export default FeaturedSection;
+
+

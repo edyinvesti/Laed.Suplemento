@@ -93,3 +93,5 @@ const QuickView = () => {
 };
 
 export default QuickView;
+
+

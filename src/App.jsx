@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { StoreProvider } from './context/StoreContext';
+import { StoreProvider, useStore } from './context/StoreContext';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import TopTicker from './components/TopTicker/TopTicker';
@@ -21,12 +21,13 @@ import CategoryNav from './components/CategoryNav/CategoryNav';
 import ShopByGoal from './components/ShopByGoal/ShopByGoal';
 import TeamLaed from './components/TeamLaed/TeamLaed';
 import Testimonials from './components/Testimonials/Testimonials';
-import { ALL_PRODUCTS } from './data/products';
+import Admin from './components/Admin/Admin';
 import './App.css';
 
 const Home = () => {
-  const highlights = ALL_PRODUCTS.filter(p => p.id === 1 || p.id === 3);
-  const newArrivals = ALL_PRODUCTS.filter(p => p.badge?.type === 'new').slice(0, 6);
+  const { products } = useStore();
+  const highlights = products.filter(p => p.id === 1 || p.id === 3);
+  const newArrivals = products.filter(p => p.badge?.type === 'new').slice(0, 6);
 
   return (
     <>
@@ -69,6 +70,7 @@ function App() {
             <Route path="/produto/:id" element={<ProductDetails />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/minha-conta" element={<Dashboard />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
 
@@ -81,3 +83,5 @@ function App() {
 }
 
 export default App;
+
+

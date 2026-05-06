@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ALL_PRODUCTS } from '../data/products';
 
 const REGIONS = [
   {"nome": "Acre", "sigla": "AC"}, {"nome": "Alagoas", "sigla": "AL"}, {"nome": "Amapá", "sigla": "AP"},
@@ -22,6 +23,8 @@ export const useStore = () => {
 };
 
 export const StoreProvider = ({ children }) => {
+  // Products state (loads from local storage or ALL_PRODUCTS)
+  const [products, setProducts] = useState(ALL_PRODUCTS);
   // Cart state: [{ ...product, quantity }]
   const [cartItems, setCartItems] = useState([]);
   // Wishlist state: Set of product IDs
@@ -44,6 +47,15 @@ export const StoreProvider = ({ children }) => {
 
   // Load from localStorage on mount
   useEffect(() => {
+    const savedProducts = localStorage.getItem('laed_products');
+    if (savedProducts) {
+      try {
+        setProducts(JSON.parse(savedProducts));
+      } catch (e) {
+        console.error('Error parsing products from localStorage', e);
+      }
+    }
+
     const savedCart = localStorage.getItem('laed_cart');
     const savedWishlist = localStorage.getItem('laed_wishlist');
     
@@ -72,6 +84,10 @@ export const StoreProvider = ({ children }) => {
   }, []);
 
   // Save to localStorage when state changes
+  useEffect(() => {
+    localStorage.setItem('laed_products', JSON.stringify(products));
+  }, [products]);
+
   useEffect(() => {
     localStorage.setItem('laed_cart', JSON.stringify(cartItems));
   }, [cartItems]);
@@ -145,6 +161,18 @@ export const StoreProvider = ({ children }) => {
   // Mobile menu state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
+  // Product management actions
+  const addProduct = useCallback((newProduct) => {
+    setProducts(prev => {
+      const maxId = prev.reduce((max, p) => (p.id > max ? p.id : max), 0);
+      return [{ ...newProduct, id: maxId + 1 }, ...prev];
+    });
+  }, []);
+
+  const deleteProduct = useCallback((productId) => {
+    setProducts(prev => prev.filter(p => p.id !== productId));
+  }, []);
+
   // Simple Routing - Hooks
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -177,6 +205,7 @@ export const StoreProvider = ({ children }) => {
 
   return (
     <StoreContext.Provider value={{
+      products, addProduct, deleteProduct,
       cartItems, addToCart, removeFromCart, updateQuantity, cartCount, cartTotal,
       wishlist, toggleWishlist, isWishlisted,
       searchQuery, setSearchQuery,
@@ -195,3 +224,5 @@ export const StoreProvider = ({ children }) => {
     </StoreContext.Provider>
   );
 };
+
+

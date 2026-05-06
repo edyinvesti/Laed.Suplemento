@@ -85,3 +85,5 @@ const NutritionalTable = ({ data }) => {
 };
 
 export default NutritionalTable;
+
+
