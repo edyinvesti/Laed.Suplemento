@@ -58,7 +58,12 @@ const ProductDetails = () => {
                   {selectedProduct.badge.text}
                 </div>
               )}
-              <img src={selectedProduct.image} alt={selectedProduct.name} className="main-image" />
+              <img
+                src={`${import.meta.env.BASE_URL}${selectedProduct.image.replace(/^\//, '')}`}
+                alt={selectedProduct.name}
+                className="main-image"
+                onError={(e) => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}produtos/whey-concentrado-chocolate.png`; }}
+              />
             </div>
           </div>
 

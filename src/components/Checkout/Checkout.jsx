@@ -4,7 +4,7 @@ import { CreditCard, Truck, ShieldCheck, ArrowLeft, CheckCircle2 } from 'lucide-
 import './Checkout.css';
 
 const Checkout = () => {
-  const { cartItems, cartTotal, goToHome } = useStore();
+  const { cartItems, cartTotal, goToHome, clearCart } = useStore();
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [orderId, setOrderId] = React.useState('');
 
@@ -44,12 +44,23 @@ const Checkout = () => {
   const handleCheckout = (e) => {
     e.preventDefault();
     
-    // Basic validation
-    if (formData.cpf.length < 14) return alert('Por favor, insira um CPF válido');
-    if (formData.cep.length < 9) return alert('Por favor, insira um CEP válido');
+    // Validação de CPF
+    const cpfDigits = formData.cpf.replace(/\D/g, '');
+    if (cpfDigits.length !== 11) return alert('Por favor, insira um CPF válido com 11 dígitos');
+    // Rejeita CPFs com todos os dígitos iguais
+    if (/^(\d)\1+$/.test(cpfDigits)) return alert('CPF inválido');
+
+    // Validação de CEP
+    if (formData.cep.replace(/\D/g, '').length !== 8) return alert('Por favor, insira um CEP válido com 8 dígitos');
+
+    // Validação de campos obrigatórios
+    if (!formData.nome.trim()) return alert('Por favor, insira seu nome completo');
+    if (!formData.email.includes('@')) return alert('Por favor, insira um e-mail válido');
     
     setOrderId((Math.random() * 100000).toFixed(0));
     setIsSuccess(true);
+    // Limpa o carrinho após finalizar o pedido
+    clearCart();
   };
 
   if (isSuccess) {

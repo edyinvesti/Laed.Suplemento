@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ALL_PRODUCTS } from '../data/products';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ALL_PRODUCTS_FULL } from '../data/products';
 
 const REGIONS = [
   {"nome": "Acre", "sigla": "AC"}, {"nome": "Alagoas", "sigla": "AL"}, {"nome": "Amapá", "sigla": "AP"},
@@ -24,7 +24,7 @@ export const useStore = () => {
 
 export const StoreProvider = ({ children }) => {
   // Products state (loads from local storage or ALL_PRODUCTS)
-  const [products, setProducts] = useState(ALL_PRODUCTS);
+  const [products, setProducts] = useState(ALL_PRODUCTS_FULL);
   // Cart state: [{ ...product, quantity }]
   const [cartItems, setCartItems] = useState([]);
   // Wishlist state: Set of product IDs
@@ -47,6 +47,13 @@ export const StoreProvider = ({ children }) => {
 
   // Load from localStorage on mount
   useEffect(() => {
+    // Limpa cache de produtos antigos ao atualizar versão
+    const DATA_VERSION = '6.0';
+    if (localStorage.getItem('laed_data_version') !== DATA_VERSION) {
+      localStorage.clear(); // limpa TUDO incluindo produtos antigos
+      localStorage.setItem('laed_data_version', DATA_VERSION);
+    }
+
     const savedProducts = localStorage.getItem('laed_products');
     if (savedProducts) {
       try {
@@ -117,6 +124,10 @@ export const StoreProvider = ({ children }) => {
     setCartItems(prev => prev.filter(i => i.id !== productId));
   }, []);
 
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+  }, []);
+
   const updateQuantity = useCallback((productId, quantity) => {
     if (quantity <= 0) {
       removeFromCart(productId);
@@ -152,7 +163,7 @@ export const StoreProvider = ({ children }) => {
   }, []);
 
   const clearFilters = useCallback(() => {
-    setActiveFilters({ categoria: [], objetivo: [], sabor: [], tamanho: [], preco: [], ingrediente: [] });
+    setActiveFilters({ categoria: [], objetivo: [], sabor: [], tamanho: [], preco: [], ingrediente: [], marca: [] });
     setSearchQuery('');
   }, []);
 
@@ -175,6 +186,7 @@ export const StoreProvider = ({ children }) => {
 
   // Simple Routing - Hooks
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const viewProduct = useCallback((product) => {
@@ -206,14 +218,14 @@ export const StoreProvider = ({ children }) => {
   return (
     <StoreContext.Provider value={{
       products, addProduct, deleteProduct,
-      cartItems, addToCart, removeFromCart, updateQuantity, cartCount, cartTotal,
+      cartItems, addToCart, removeFromCart, updateQuantity, clearCart, cartCount, cartTotal,
       wishlist, toggleWishlist, isWishlisted,
       searchQuery, setSearchQuery,
       activeFilters, toggleFilter, clearFilters,
       sortOrder, setSortOrder,
       isCartOpen, setIsCartOpen,
       isMobileMenuOpen, setIsMobileMenuOpen,
-      currentPage: window.location.pathname, // simple fallback
+      currentPage: location.pathname,
       selectedProduct, viewProduct,
       goToHome, goToCheckout,
       REGIONS, selectedRegion, setSelectedRegion,

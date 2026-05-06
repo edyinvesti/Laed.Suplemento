@@ -1,21 +1,23 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import { useStore } from '../../context/StoreContext';
 import './ProductGrid.css';
 
+const PAGE_SIZE = 12;
+
 const ProductGrid = () => {
   const { searchQuery, activeFilters, sortOrder, setSortOrder, products } = useStore();
+  const [page, setPage] = useState(1);
 
   const filteredProducts = useMemo(() => {
+    // Reset page when filters change
     let results = products;
 
-    // Search filter
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       results = results.filter(p => p.name.toLowerCase().includes(q));
     }
 
-    // Active filters
     const entries = Object.entries(activeFilters);
     if (entries.length > 0) {
       results = results.filter(product => {
@@ -35,11 +37,10 @@ const ProductGrid = () => {
             }
           }
         }
-        return true; // If the product passes all active filters
+        return true;
       });
     }
 
-    // Sort
     switch (sortOrder) {
       case 'menor-preco':
         results = [...results].sort((a, b) => a.price - b.price);
@@ -50,20 +51,33 @@ const ProductGrid = () => {
       case 'lancamentos':
         results = [...results].sort((a, b) => b.id - a.id);
         break;
-      default: // mais-vendidos
+      default:
         results = [...results].sort((a, b) => b.reviews - a.reviews);
     }
 
     return results;
-  }, [searchQuery, activeFilters, sortOrder]);
+  }, [searchQuery, activeFilters, sortOrder, products]);
 
-  const handleSortChange = (e) => setSortOrder(e.target.value);
+  // Reset page when filters/sort change
+  useMemo(() => { setPage(1); }, [searchQuery, activeFilters, sortOrder]);
+
+  const visibleProducts = filteredProducts.slice(0, page * PAGE_SIZE);
+  const hasMore = visibleProducts.length < filteredProducts.length;
+
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
+    setPage(1);
+  };
+
+  // Active filter label
+  const activeCat = activeFilters.categoria?.[0];
+  const title = activeCat ? activeCat.toUpperCase() : 'TODOS OS PRODUTOS';
 
   return (
     <div className="product-grid-container">
       <div className="grid-header">
         <h2>
-          PRODUTOS EM DESTAQUE
+          {title}
           <span className="product-count">{filteredProducts.length} produto{filteredProducts.length !== 1 ? 's' : ''}</span>
         </h2>
         <div className="grid-sort">
@@ -84,15 +98,17 @@ const ProductGrid = () => {
         </div>
       ) : (
         <div className="product-grid">
-          {filteredProducts.map(product => (
+          {visibleProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       )}
 
-      {filteredProducts.length > 0 && (
+      {hasMore && (
         <div className="pagination">
-          <button className="btn-load-more">CARREGAR MAIS PRODUTOS</button>
+          <button className="btn-load-more" onClick={() => setPage(p => p + 1)}>
+            CARREGAR MAIS PRODUTOS ({filteredProducts.length - visibleProducts.length} restantes)
+          </button>
         </div>
       )}
     </div>

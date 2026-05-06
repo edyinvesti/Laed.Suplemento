@@ -122,7 +122,9 @@ const Admin = () => {
                   <option value="Creatina">Creatina</option>
                   <option value="Vitaminas">Vitaminas</option>
                   <option value="Aminoácidos">Aminoácidos</option>
-                  <option value="Acessórios">Acessórios</option>
+                  <option value="Pré-Treino">Pré-Treino</option>
+                  <option value="Termogênico">Termogênico</option>
+                  <option value="Kits">Kits</option>
                 </select>
               </div>
               <div className="form-group">
