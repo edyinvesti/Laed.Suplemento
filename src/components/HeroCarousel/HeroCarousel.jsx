@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useStore } from '../../context/StoreContext';
 import './HeroCarousel.css';
 
+const BASE = import.meta.env.BASE_URL;
+
 const slides = [
   {
     id: 0,
-    bgImage: '/laed-bg-arnold.png',
+    bgImage: `${BASE}hero/hero-arnold.jpg`,
     eyebrow: 'A LAED TE LEVA',
     title: 'PRO ARNOLD!',
     subtitle: 'COMPRE ACIMA DE R$ 279,90',
@@ -15,7 +17,7 @@ const slides = [
   },
   {
     id: 1,
-    bgImage: '/laed-cyber-bottles.png',
+    bgImage: `${BASE}hero/hero-kit.jpg`,
     eyebrow: 'AGORA COM DESCONTO EXCLUSIVO',
     title: 'R$ 159,90',
     subtitle: 'KIT WHEY CONCENTRADO + CREATINA',
@@ -25,7 +27,7 @@ const slides = [
   },
   {
     id: 2,
-    bgImage: '/laed-hero-gym.png',
+    bgImage: `${BASE}hero/hero-gym-1.jpg`,
     eyebrow: 'FOCO TOTAL:',
     title: 'SUA MELHOR VERSÃO',
     subtitle: 'ESTÁ AQUI',
@@ -35,7 +37,7 @@ const slides = [
   },
   {
     id: 3,
-    bgImage: '/laed-hero-gym-2.jpg',
+    bgImage: `${BASE}hero/hero-gym-2.jpg`,
     eyebrow: 'MÁXIMA RESISTÊNCIA:',
     title: 'TREINE PESADO',
     subtitle: 'O SEU LIMITE É SÓ O COMEÇO',
@@ -45,7 +47,7 @@ const slides = [
   },
   {
     id: 4,
-    bgImage: '/laed-hero-gym-3.jpg',
+    bgImage: `${BASE}hero/hero-gym-3.jpg`,
     eyebrow: 'FORÇA BASE:',
     title: 'TREINO SÉRIO',
     subtitle: 'A CONSTRUÇÃO COMEÇA AQUI',
@@ -55,7 +57,7 @@ const slides = [
   },
   {
     id: 5,
-    bgImage: '/laed-hero-gym-4.jpg',
+    bgImage: `${BASE}hero/hero-gym-4.jpg`,
     eyebrow: 'DUPLA PERFORMANCE:',
     title: 'FOCO TOTAL',
     subtitle: 'JUNTOS NA MESMA SINTONIA',
